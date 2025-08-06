@@ -1,30 +1,67 @@
-let img;
+  let words = ["brat", "demure", "labubu", "honey", "money", "utopia", "loba", "sugar", "rush", "frozen", "motomami", "frosti", "me&u", "365", "party4u",];
+  let word;
 
-function preload() {
-  img = loadImage('/images/qr.png');
-}
+  let textPositionX;
+  let textPositionY;
+  
+  let textSpeedX = 4;
+  let textSpeedY = 7;  
+
+  let textHue = 0;
 
 function setup() {
-  createCanvas(displayWidth,displayHeight);
+
+  createCanvas(windowWidth, windowHeight);
+  colorMode(HSB);
+  textAlign(CENTER, CENTER);
+  textPositionX = width/2;
+  textPositionY = height/2;
+  //select initial word
+  selectRandomWord();
 }
 
 function draw() {
-  background(50, 50, 50);
-  //vertical rectangle in the center
-  fill(0,0,0);
-  noStroke();
-  rect(windowWidth*.5-100,windowHeight*.5-175,200,350);
   
-  fill(mouseY*.3);
-  textSize(200);
-  textAlign(CENTER,CENTER);
-  text('X',windowWidth*.5,windowHeight*.5);
+  let w = textWidth(word);  
+  let h = textAscent(word)
+  let b = textDescent(word)
   
-  fill(255);
-  textSize(12);
-  text('RACHANA PATEL\n+1 929 505 3729\nRACHANA@EXTRASILKY.CO',windowWidth*.5,windowHeight*.5-125);
+  frameRate(15);
+  //style word
+  stroke(textHue, 80, 90);
+  strokeWeight(windowWidth * 0.0025);
+  fill(textHue * 2, 80, 90);
+  textSize(windowWidth * 0.05);
+  //place word
+  text(word,textPositionX, textPositionY);
   
-  imageMode(CORNERS);
-  image(img,windowWidth*.5-50,windowHeight*.5+70,windowWidth*.5+50,windowHeight*.5+170);
-
+  textPositionX = textPositionX + textSpeedX;
+  textPositionY = textPositionY + textSpeedY;
+  textHue = textHue + 0.5;
+  
+  if (textHue >= 360) {
+    textHue = 0;
+  }
+  
+  if (
+    textPositionX < w/2 ||
+    textPositionX > width - w/2
+  ) {
+    textSpeedX = -textSpeedX;
+  }
+  
+  if (
+    textPositionY < h/2 ||
+    textPositionY > height - h/2
+  ) {
+    textSpeedY = -textSpeedY;
+  }
+  
+  function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  background (255);
+  }
+}
+  function selectRandomWord() {
+  word = random(words);
 }
