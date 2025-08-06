@@ -1,4 +1,4 @@
-  let words = ["brat", "demure", "labubu", "honey", "money", "utopia", "loba", "sugar", "rush", "frozen", "motomami", "frosti", "me&u", "365", "party4u",];
+  let words = ["brat", "demure", "labubu", "honey", "sweet", "utopia", "loba", "sugar", "rush", "frozen", "motomami", "frosti", "me&u", "365", "party4u",];
   let word;
 
   let textPositionX;
